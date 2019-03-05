@@ -7,7 +7,7 @@ A resource watcher allows you to watch a resource for any changes. This means yo
 To install Resource Watcher add it to the `requires` key of your `composer.json` file.
 
 ```
-"matthijsthoolen/resource-watcher": "1.2.*"
+"matthijsthoolen/resource-watcher": "2.0.*"
 ```
 
 Then update your project with `composer update`.
