@@ -2,14 +2,12 @@
 
 A resource watcher allows you to watch a resource for any changes. This means you can watch a directory and then listen for any changes to files within that directory or to the directory itself.
 
-[![Build Status](https://travis-ci.org/jasonlewis/resource-watcher.png?branch=master)](https://travis-ci.org/jasonlewis/resource-watcher)
-
 ## Installation
 
 To install Resource Watcher add it to the `requires` key of your `composer.json` file.
 
 ```
-"jasonlewis/resource-watcher": "1.2.*"
+"matthijsthoolen/resource-watcher": "1.2.*"
 ```
 
 Then update your project with `composer update`.
@@ -27,13 +25,13 @@ Any changes you make to the resource will be outputted to the console.
 
 ## Quick Overview
 
-To watch resources you first need an instance of `JasonLewis\ResourceWatcher\Watcher`. This class has a few dependencies (`JasonLewis\ResourceWatcher\Tracker` and `Illuminate\Filesystem\Filesystem`) that must also be instantiated.
+To watch resources you first need an instance of `MatthijsThoolen\ResourceWatcher\Watcher`. This class has a few dependencies (`MatthijsThoolen\ResourceWatcher\Tracker` and `Illuminate\Filesystem\Filesystem`) that must also be instantiated.
 
 ```php
 $files = new Illuminate\Filesystem\Filesystem;
-$tracker = new JasonLewis\ResourceWatcher\Tracker;
+$tracker = new MatthijsThoolen\ResourceWatcher\Tracker;
 
-$watcher = new JasonLewis\ResourceWatcher\Watcher($tracker, $files);
+$watcher = new MatthijsThoolen\ResourceWatcher\Watcher($tracker, $files);
 ```
 
 Now that we have our watcher we can create a listener for a given resource.
@@ -42,9 +40,9 @@ Now that we have our watcher we can create a listener for a given resource.
 $listener = $watcher->watch('path/to/resource');
 ```
 
-When you watch a resource an instance of `JasonLewis\ResourceWatcher\Listener` is returned. With this we can now listen for certain events on a resource.
+When you watch a resource an instance of `MatthijsThoolen\ResourceWatcher\Listener` is returned. With this we can now listen for certain events on a resource.
 
-There are three events we can listen for: `modify`, `create`, and `delete`. The callback you give to the listener receives two parameters, the first being an implementation of `JasonLewis\ResourceWatcher\Resource\ResourceInterface` and the second being the absolute path to the resource.
+There are three events we can listen for: `modify`, `create`, and `delete`. The callback you give to the listener receives two parameters, the first being an implementation of `MatthijsThoolen\ResourceWatcher\Resource\ResourceInterface` and the second being the absolute path to the resource.
 
 ```php
 $listener->modify(function($resource, $path) {
@@ -60,7 +58,7 @@ $listener->onModify(function($resource, $path) {
 });
 ```
 
-You can also listen for any of these events. This time the callback receives a different set of parameters, the first being an instance of `JasonLewis\ResourceWatcher\Event` and the remaining two being the same as before.
+You can also listen for any of these events. This time the callback receives a different set of parameters, the first being an instance of `MatthijsThoolen\ResourceWatcher\Event` and the remaining two being the same as before.
 
 ```php
 $listener->anything(function($event, $resource, $path) {
@@ -68,7 +66,7 @@ $listener->anything(function($event, $resource, $path) {
 });
 ```
 
-> Remember that each call to `$watcher->watch()` will return an instance of `JasonLewis\ResourceWatcher\Listener`, so be sure you attach listeners to the right one!
+> Remember that each call to `$watcher->watch()` will return an instance of `MatthijsThoolen\ResourceWatcher\Listener`, so be sure you attach listeners to the right one!
 
 Once you're watching some resources and have your listeners set up you can start the watching process.
 
@@ -91,9 +89,9 @@ $watcher->start(1000000, null, function($watcher) {
 
 ### Laravel 4 and Laravel 5
 
-Included is a service provider for the Laravel framework. This service provider will bind an instance of `JasonLewis\ResourceWatcher\Watcher` to the application container under the `watcher` key.
+Included is a service provider for the Laravel framework. This service provider will bind an instance of `MatthijsThoolen\ResourceWatcher\Watcher` to the application container under the `watcher` key.
 
-Register `JasonLewis\ResourceWatcher\Integration\LaravelServiceProvider` in the array of providers in `app/config/app.php`.
+Register `MatthijsThoolen\ResourceWatcher\Integration\LaravelServiceProvider` in the array of providers in `app/config/app.php`.
 
 ```php
 $listener = $app['watcher']->watch('path/to/resource');
