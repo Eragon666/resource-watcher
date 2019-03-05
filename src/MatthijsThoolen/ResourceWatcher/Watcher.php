@@ -1,25 +1,25 @@
-<?php namespace JasonLewis\ResourceWatcher;
+<?php namespace MatthijsThoolen\ResourceWatcher;
 
 use Closure;
 use SplFileInfo;
 use RuntimeException;
 use Illuminate\Filesystem\Filesystem;
-use JasonLewis\ResourceWatcher\Resource\FileResource;
-use JasonLewis\ResourceWatcher\Resource\DirectoryResource;
+use MatthijsThoolen\ResourceWatcher\Resource\FileResource;
+use MatthijsThoolen\ResourceWatcher\Resource\DirectoryResource;
 
 class Watcher
 {
     /**
      * Tracker instance.
      *
-     * @var \JasonLewis\ResourceWatcher\Tracker
+     * @var Tracker
      */
     protected $tracker;
 
     /**
      * Illuminate filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -33,8 +33,8 @@ class Watcher
     /**
      * Create a new watcher instance.
      *
-     * @param  \JasonLewis\ResourceWatcher\Tracker  $tracker
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  Tracker  $tracker
+     * @param  Filesystem  $files
      * @return void
      */
     public function __construct(Tracker $tracker, Filesystem $files)
@@ -46,10 +46,10 @@ class Watcher
     /**
      * Register a resource to be watched.
      *
-     * @param  string|array  $resource
-     * @return \JasonLewis\ResourceWatcher\Listener
+     * @param  string|array  $resources
+     * @return \MatthijsThoolen\ResourceWatcher\Listener
      */
-    public function watch($resource)
+    public function watch($resources)
     {
         if (is_array($resources) === false) {
             $resources = array($resources);
@@ -124,7 +124,7 @@ class Watcher
     /**
      * Get the tracker instance.
      *
-     * @return \JasonLewis\ResourceWatcher\Tracker
+     * @return \MatthijsThoolen\ResourceWatcher\Tracker
      */
     public function getTracker()
     {

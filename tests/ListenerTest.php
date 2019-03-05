@@ -1,24 +1,24 @@
 <?php
 
 use Mockery as m;
-use JasonLewis\ResourceWatcher\Event;
-use JasonLewis\ResourceWatcher\Listener;
+use MatthijsThoolen\ResourceWatcher\Event;
+use MatthijsThoolen\ResourceWatcher\Listener;
+use PHPUnit\Framework\TestCase;
 
-class ListenerTest extends PHPUnit_Framework_TestCase {
+class ListenerTest extends TestCase {
 
 
-	public function tearDown()
+    protected function tearDown() : void
 	{
 		m::close();
 	}
 
-
-	/**
-	 * @expectedException \RuntimeException
-	 */
 	public function testRegisteringInvalidBindingThrowsException()
 	{
 		$listener = new Listener;
+
+		$this->expectException(\RuntimeException::class);
+
 		$listener->on('fail', function(){});
 	}
 
@@ -68,7 +68,7 @@ class ListenerTest extends PHPUnit_Framework_TestCase {
 
 	public function testDetermineEventBinding()
 	{
-		$resource = m::mock('JasonLewis\ResourceWatcher\Resource\ResourceInterface');
+		$resource = m::mock('MatthijsThoolen\ResourceWatcher\Resource\ResourceInterface');
 		$listener = new Listener;
 		$event = new Event($resource, Event::RESOURCE_CREATED);
 		$this->assertEquals('create', $listener->determineEventBinding($event));

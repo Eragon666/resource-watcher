@@ -1,10 +1,10 @@
 <?php
 
-namespace JasonLewis\ResourceWatcher\Integration;
+namespace MatthijsThoolen\ResourceWatcher\Integration;
 
 use Illuminate\Support\ServiceProvider;
-use JasonLewis\ResourceWatcher\Tracker;
-use JasonLewis\ResourceWatcher\Watcher;
+use MatthijsThoolen\ResourceWatcher\Tracker;
+use MatthijsThoolen\ResourceWatcher\Watcher;
 
 class LaravelServiceProvider extends ServiceProvider
 {
@@ -26,7 +26,7 @@ class LaravelServiceProvider extends ServiceProvider
             return new Watcher(new Tracker, $app['files']);
         });
 
-        $this->app->alias('watcher', 'JasonLewis\ResourceWatcher\Watcher');
+        $this->app->alias('watcher', 'MatthijsThoolen\ResourceWatcher\Watcher');
     }
 
     /**

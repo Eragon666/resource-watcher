@@ -1,13 +1,14 @@
 <?php
 
 use Mockery as m;
-use JasonLewis\ResourceWatcher\Watcher;
-use JasonLewis\ResourceWatcher\Tracker;
+use MatthijsThoolen\ResourceWatcher\Watcher;
+use MatthijsThoolen\ResourceWatcher\Tracker;
+use PHPUnit\Framework\TestCase;
 
-class WatcherTest extends PHPUnit_Framework_TestCase {
+class WatcherTest extends TestCase {
 
 
-	public function setUp()
+    protected function setUp() : void
 	{
 		$this->tracker = new Tracker;
 		$this->files = m::mock('Illuminate\Filesystem\Filesystem');
@@ -15,18 +16,16 @@ class WatcherTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	public function tearDown()
+    protected function tearDown() : void
 	{
 		m::close();
 	}
 
-
-	/**
-	 * @expectedException \RuntimeException
-	 */
 	public function testWatchingNonExistentResourceThrowsException()
 	{
 		$this->files->shouldReceive('exists')->once()->andReturn(false);
+
+		$this->expectException(\RuntimeException::class);
 
 		$this->watcher->watch(__DIR__);
 	}
@@ -42,7 +41,7 @@ class WatcherTest extends PHPUnit_Framework_TestCase {
 
 		$tracked = $this->watcher->getTracker()->getTracked();
 		$resource = array_pop($tracked);
-		$this->assertInstanceOf('JasonLewis\ResourceWatcher\Resource\DirectoryResource', $resource[0]);
+		$this->assertInstanceOf('MatthijsThoolen\ResourceWatcher\Resource\DirectoryResource', $resource[0]);
 	}
 	
 	public function testWatchMultipleDirectoryResource()
@@ -53,7 +52,7 @@ class WatcherTest extends PHPUnit_Framework_TestCase {
 		$this->watcher->watch(array(__DIR__,__DIR__));
 		$tracked = $this->watcher->getTracker()->getTracked();
 		$resource = array_pop($tracked);
-		$this->assertInstanceOf('JasonLewis\ResourceWatcher\Resource\DirectoryResource', $resource[0]);
+		$this->assertInstanceOf('MatthijsThoolen\ResourceWatcher\Resource\DirectoryResource', $resource[0]);
 	}
 
 
@@ -65,7 +64,7 @@ class WatcherTest extends PHPUnit_Framework_TestCase {
 		$this->watcher->watch(__DIR__);
 		$tracked = $this->watcher->getTracker()->getTracked();
 		$resource = array_pop($tracked);
-		$this->assertInstanceOf('JasonLewis\ResourceWatcher\Resource\FileResource', $resource[0]);
+		$this->assertInstanceOf('MatthijsThoolen\ResourceWatcher\Resource\FileResource', $resource[0]);
 	}
 
 
@@ -86,7 +85,7 @@ class WatcherTest extends PHPUnit_Framework_TestCase {
 
 	public function testCanGetTrackerInstance()
 	{
-		$this->assertInstanceOf('JasonLewis\ResourceWatcher\Tracker', $this->watcher->getTracker());
+		$this->assertInstanceOf('MatthijsThoolen\ResourceWatcher\Tracker', $this->watcher->getTracker());
 	}
 
 
@@ -97,7 +96,7 @@ class WatcherTest extends PHPUnit_Framework_TestCase {
 		touch(__DIR__.'/mock.file');
 
 		$listener = $this->watcher->watch(__DIR__.'/mock.file');
-		$this->assertInstanceOf('JasonLewis\ResourceWatcher\Listener', $listener);
+		$this->assertInstanceOf('MatthijsThoolen\ResourceWatcher\Listener', $listener);
 
 		$created = $modified = $deleted = $anything = false;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace JasonLewis\ResourceWatcher\Resource;
+namespace MatthijsThoolen\ResourceWatcher\Resource;
 
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-use JasonLewis\ResourceWatcher\Event;
+use MatthijsThoolen\ResourceWatcher\Event;
 use Illuminate\Filesystem\Filesystem;
 
 class DirectoryResource extends FileResource implements ResourceInterface

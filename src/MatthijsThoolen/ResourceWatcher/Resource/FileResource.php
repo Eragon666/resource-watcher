@@ -1,9 +1,9 @@
 <?php
 
-namespace JasonLewis\ResourceWatcher\Resource;
+namespace MatthijsThoolen\ResourceWatcher\Resource;
 
 use SplFileInfo;
-use JasonLewis\ResourceWatcher\Event;
+use MatthijsThoolen\ResourceWatcher\Event;
 use Illuminate\Filesystem\Filesystem;
 
 class FileResource implements ResourceInterface
@@ -25,7 +25,7 @@ class FileResource implements ResourceInterface
     /**
      * Illuminate filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -47,7 +47,7 @@ class FileResource implements ResourceInterface
      * Create a new resource instance.
      *
      * @param  \SplFileInfo  $resource
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  Filesystem  $files
      * @return void
      */
     public function __construct(SplFileInfo $resource, Filesystem $files)

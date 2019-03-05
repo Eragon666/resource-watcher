@@ -1,12 +1,13 @@
 <?php
 
 use Mockery as m;
-use JasonLewis\ResourceWatcher\Event;
+use MatthijsThoolen\ResourceWatcher\Event;
+use PHPUnit\Framework\TestCase;
 
-class EventTest extends PHPUnit_Framework_TestCase {
+class EventTest extends TestCase {
 
 
-	public function tearDown()
+    protected function tearDown() : void
 	{
 		m::close();
 	}
@@ -14,7 +15,7 @@ class EventTest extends PHPUnit_Framework_TestCase {
 
 	public function testCanGetEventCode()
 	{
-		$resource = m::mock('JasonLewis\ResourceWatcher\Resource\ResourceInterface');
+		$resource = m::mock('MatthijsThoolen\ResourceWatcher\Resource\ResourceInterface');
 		$event = new Event($resource, Event::RESOURCE_CREATED);
 		$this->assertEquals(Event::RESOURCE_CREATED, $event->getCode());
 	}
@@ -22,9 +23,9 @@ class EventTest extends PHPUnit_Framework_TestCase {
 
 	public function testCanGetResourceFromEvent()
 	{
-		$resource = m::mock('JasonLewis\ResourceWatcher\Resource\ResourceInterface');
+		$resource = m::mock('MatthijsThoolen\ResourceWatcher\Resource\ResourceInterface');
 		$event = new Event($resource, Event::RESOURCE_CREATED);
-		$this->assertInstanceOf('JasonLewis\ResourceWatcher\Resource\ResourceInterface', $event->getResource());
+		$this->assertInstanceOf('MatthijsThoolen\ResourceWatcher\Resource\ResourceInterface', $event->getResource());
 	}
 
 

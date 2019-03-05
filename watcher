@@ -26,7 +26,7 @@ require __DIR__.'/vendor/autoload.php';
 
 $files = new Illuminate\Filesystem\Filesystem();
 
-$tracker = new JasonLewis\ResourceWatcher\Tracker();
+$tracker = new MatthijsThoolen\ResourceWatcher\Tracker();
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ $tracker = new JasonLewis\ResourceWatcher\Tracker();
 |
 */
 
-$watcher = new JasonLewis\ResourceWatcher\Watcher($tracker, $files);
+$watcher = new MatthijsThoolen\ResourceWatcher\Watcher($tracker, $files);
 
 /*
 |--------------------------------------------------------------------------
@@ -102,13 +102,13 @@ $listener->onModify(function ($resource, $path) {
 
 $listener->onAnything(function ($event, $resource, $path) {
     switch ($event->getCode()) {
-        case JasonLewis\ResourceWatcher\Event::RESOURCE_DELETED:
+        case MatthijsThoolen\ResourceWatcher\Event::RESOURCE_DELETED:
             echo "{$path} was deleted (from anything listener).".PHP_EOL;
             break;
-        case JasonLewis\ResourceWatcher\Event::RESOURCE_MODIFIED:
+        case MatthijsThoolen\ResourceWatcher\Event::RESOURCE_MODIFIED:
             echo "{$path} was modified (from anything listener).".PHP_EOL;
             break;
-        case JasonLewis\ResourceWatcher\Event::RESOURCE_CREATED:
+        case MatthijsThoolen\ResourceWatcher\Event::RESOURCE_CREATED:
             echo "{$path} was created (from anything listener).".PHP_EOL;
             break;
     }
