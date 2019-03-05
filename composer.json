@@ -1,5 +1,5 @@
 {
-    "name": "eragon/resource-watcher",
+    "name": "matthijsthoolen/resource-watcher",
     "description": "Simple PHP resource watcher library.",
     "keywords": ["resource", "assets", "laravel"],
     "authors": [
@@ -8,7 +8,8 @@
             "email": "jason.lewis1991@gmail.com"
         },
         {
-            "name": "Matthijs"
+            "name": "Matthijs Thoolen",
+            "email": "matthijsthoolen@hotmail.com"
         }
     ],
     "require": {
@@ -22,7 +23,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Resourcy\\ResourceWatcher": "src/"
+            "MatthijsThoolen\\ResourceWatcher": "src/"
         }
     }
 }
